@@ -24,7 +24,6 @@ var input = [{
 }]
 
 var values = WidgetList(input, function create(x) {
-    console.log("x", x)
 
     var input = document.createElement("input")
     input.value = x.value
@@ -34,14 +33,15 @@ var values = WidgetList(input, function create(x) {
         console.log("ev", ev)
         return { value: input.value }
     })
+
     widget.view = input
+
     return widget
 }, function destroy(widget) {
     widget.view.parentNode.removeChild(widget.view)
 })
 
-console.log("values", values)
-
 fold(values, function (changes) {
     console.log("change", changes)
+    // { value: textContentThing }
 })

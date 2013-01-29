@@ -24,8 +24,7 @@
     "browserify": "https://github.com/raynos/node-browserify/tarball/master",
     "testem": "~0.2.56",
     "dom-reduce": "~1.0.0",
-    "browservefy": "0.0.2",
-    "reducible": "~1.0.5"
+    "browservefy": "0.0.2"
   },
   "licenses": [
     {

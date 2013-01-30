@@ -52,3 +52,28 @@ test("removal works", function (assert) {
     assert.deepEqual(list, [{ alive: false }])
     assert.end()
 })
+
+test("order makes sense", function (assert) {
+    var list = into(WidgetList([
+        { id: 1, eventType: "add" }
+        , { id: 2, eventType: "add" }
+        , { id: 1, eventType: "add" }
+        , { id: 3, eventType: "add" }
+        , { id: 4, eventType: "add" }
+        , { id: 2, eventType: "remove" }
+        , { id: 1, eventType: "remove" }
+        , { id: 2, eventType: "remove" }
+        , { id: 1, eventType: "add" }
+    ], function create(x) {
+        return { alive: true }
+    }, function destroy(x) {
+        x.alive = false
+    }))
+
+    var alive = list.filter(function (x) {
+        return x.alive
+    })
+
+    assert.equal(alive.length, 3)
+    assert.end()
+})

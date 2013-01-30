@@ -12,20 +12,15 @@ module.exports = WidgetList
 function WidgetList(reducible, creation, destruction) {
     var hash = {}
 
-    return merge([
-        expand(reducible, function checkAddition(input) {
-            if (!hash[input.id] && input.eventType === "add") {
-                var widget = creation.apply(this, arguments)
-                hash[input.id] = widget
-                return widget
-            }
-        })
-        , expand(reducible, function checkRemoval(input) {
-            var widget = hash[input.id]
-            if (widget && input.eventType === "remove") {
-                delete hash[input.id]
-                destruction(widget)
-            }
-        })
-    ])
+    return expand(reducible, function (input) {
+        var widget = hash[input.id]
+        if (!widget && input.eventType === "add") {
+            widget = creation.apply(this, arguments)
+            hash[input.id] = widget
+            return widget
+        } else if (widget && input.eventType === "remove") {
+            delete hash[input.id]
+            destruction(widget, input)
+        }
+    })
 }

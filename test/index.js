@@ -2,6 +2,7 @@ var test = require("tape")
 var into = require("reducers/into")
 
 var WidgetList = require("../index")
+var widgets = require("../widgets")
 
 test("WidgetList is a function", function (assert) {
     assert.equal(typeof WidgetList, "function")
@@ -75,5 +76,24 @@ test("order makes sense", function (assert) {
     })
 
     assert.equal(alive.length, 3)
+    assert.end()
+})
+
+test("widgets", function (assert) {
+    var list = WidgetList([
+        { id: 1, eventType: "add" }
+        , { id: 2, eventType: "add" }
+        , { id: 3, eventType: "add" }
+    ], function create(x) {
+        return { id: x.id, thing: true }
+    })
+
+    into(list)
+
+    assert.deepEqual(widgets(list), [
+        [{ id: 1, thing: true }, "1"]
+        , [{ id: 2, thing: true }, "2"]
+        , [{ id: 3, thing: true }, "3"]
+    ])
     assert.end()
 })

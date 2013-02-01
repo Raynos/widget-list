@@ -70,6 +70,21 @@ fold(values, function (changes) {
 })
 ```
 
+### Getting the widgets themself
+
+You can also use the `widgets` function on any list to
+    get it's current widgets
+
+```js
+var widgets = require("widget-list/widgets")
+var List = require("widget-list")
+
+var list = List(...)
+
+var currentWidgets = widgets(list)
+// [[Widget, id], [Widget, id], ...]
+```
+
 ## Installation
 
 `npm install widget-list`

@@ -12,7 +12,7 @@ module.exports = WidgetList
 function WidgetList(reducible, creation, destruction) {
     var hash = {}
 
-    return expand(reducible, function (input) {
+    var list = expand(reducible, function (input) {
         var widget = hash[input.id]
         if (!widget && input.eventType === "add") {
             widget = creation.apply(this, arguments)
@@ -23,4 +23,14 @@ function WidgetList(reducible, creation, destruction) {
             destruction(widget, input)
         }
     })
+
+    list.__getWidgets__ = widgets
+
+    return list
+
+    function widgets() {
+        return Object.keys(hash).map(function (key) {
+            return [hash[key], key]
+        })
+    }
 }

@@ -17,14 +17,14 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "reducers": "Raynos/reducers"
+    "reducers": "Raynos/reducers#dedup",
+    "reducible": "Raynos/reducible#v1.0.6"
   },
   "devDependencies": {
     "tape": "~0.2.2",
-    "reducible": "~1.0.5",
     "browserify": "https://github.com/raynos/node-browserify/tarball/master",
     "testem": "~0.2.56",
-    "dom-reduce": "~1.0.0",
+    "dom-reduce": "Raynos/dom-reduce#dedup",
     "browservefy": "0.0.2"
   },
   "licenses": [
